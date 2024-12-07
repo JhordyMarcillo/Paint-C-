@@ -1,0 +1,10 @@
+C:\Users\USER\Documents\ESPE\5to semestre\grafica\Proyecto\Proyecto\bin\Debug\Proyecto.exe.config
+C:\Users\USER\Documents\ESPE\5to semestre\grafica\Proyecto\Proyecto\bin\Debug\Proyecto.exe
+C:\Users\USER\Documents\ESPE\5to semestre\grafica\Proyecto\Proyecto\bin\Debug\Proyecto.pdb
+C:\Users\USER\Documents\ESPE\5to semestre\grafica\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.AssemblyReference.cache
+C:\Users\USER\Documents\ESPE\5to semestre\grafica\Proyecto\Proyecto\obj\Debug\Proyecto.Form1.resources
+C:\Users\USER\Documents\ESPE\5to semestre\grafica\Proyecto\Proyecto\obj\Debug\Proyecto.Properties.Resources.resources
+C:\Users\USER\Documents\ESPE\5to semestre\grafica\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.GenerateResource.cache
+C:\Users\USER\Documents\ESPE\5to semestre\grafica\Proyecto\Proyecto\obj\Debug\Proyecto.csproj.CoreCompileInputs.cache
+C:\Users\USER\Documents\ESPE\5to semestre\grafica\Proyecto\Proyecto\obj\Debug\Proyecto.exe
+C:\Users\USER\Documents\ESPE\5to semestre\grafica\Proyecto\Proyecto\obj\Debug\Proyecto.pdb
