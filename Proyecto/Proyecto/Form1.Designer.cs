@@ -50,11 +50,17 @@
             this.picker = new System.Windows.Forms.PictureBox();
             this.PenColor = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.nuevoArchivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cargarArchivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDeshacer = new System.Windows.Forms.Button();
+            this.btnRehacer = new System.Windows.Forms.Button();
+            this.numericUpDownThickness = new System.Windows.Forms.NumericUpDown();
             this.PinTitle.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PenColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownThickness)).BeginInit();
             this.SuspendLayout();
             // 
             // fontDialog1
@@ -80,14 +86,17 @@
             this.archivoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1898, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(1898, 33);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // archivoToolStripMenuItem
             // 
+            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nuevoArchivoToolStripMenuItem,
+            this.cargarArchivoToolStripMenuItem});
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(88, 30);
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(88, 29);
             this.archivoToolStripMenuItem.Text = "Archivo";
             this.archivoToolStripMenuItem.Click += new System.EventHandler(this.archivoToolStripMenuItem_Click);
             // 
@@ -240,6 +249,7 @@
             this.BtnSave.TabIndex = 32;
             this.BtnSave.Text = "Guardar";
             this.BtnSave.UseVisualStyleBackColor = true;
+            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // BtnRefresh
             // 
@@ -287,11 +297,71 @@
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
+            // nuevoArchivoToolStripMenuItem
+            // 
+            this.nuevoArchivoToolStripMenuItem.Name = "nuevoArchivoToolStripMenuItem";
+            this.nuevoArchivoToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.nuevoArchivoToolStripMenuItem.Text = "Nuevo Archivo";
+            this.nuevoArchivoToolStripMenuItem.Click += new System.EventHandler(this.nuevoArchivoToolStripMenuItem_Click);
+            // 
+            // cargarArchivoToolStripMenuItem
+            // 
+            this.cargarArchivoToolStripMenuItem.Name = "cargarArchivoToolStripMenuItem";
+            this.cargarArchivoToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.cargarArchivoToolStripMenuItem.Text = "Cargar Archivo";
+            this.cargarArchivoToolStripMenuItem.Click += new System.EventHandler(this.cargarArchivoToolStripMenuItem_Click);
+            // 
+            // btnDeshacer
+            // 
+            this.btnDeshacer.Location = new System.Drawing.Point(1080, 36);
+            this.btnDeshacer.Name = "btnDeshacer";
+            this.btnDeshacer.Size = new System.Drawing.Size(100, 29);
+            this.btnDeshacer.TabIndex = 52;
+            this.btnDeshacer.Text = "Deshacer";
+            this.btnDeshacer.UseVisualStyleBackColor = true;
+            this.btnDeshacer.Click += new System.EventHandler(this.btnDeshacer_Click);
+            // 
+            // btnRehacer
+            // 
+            this.btnRehacer.Location = new System.Drawing.Point(1080, 71);
+            this.btnRehacer.Name = "btnRehacer";
+            this.btnRehacer.Size = new System.Drawing.Size(100, 37);
+            this.btnRehacer.TabIndex = 53;
+            this.btnRehacer.Text = "Rehacer";
+            this.btnRehacer.UseVisualStyleBackColor = true;
+            this.btnRehacer.Click += new System.EventHandler(this.btnRehacer_Click);
+            // 
+            // numericUpDownThickness
+            // 
+            this.numericUpDownThickness.Location = new System.Drawing.Point(251, 55);
+            this.numericUpDownThickness.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numericUpDownThickness.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownThickness.Name = "numericUpDownThickness";
+            this.numericUpDownThickness.Size = new System.Drawing.Size(100, 26);
+            this.numericUpDownThickness.TabIndex = 54;
+            this.numericUpDownThickness.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDownThickness.ValueChanged += new System.EventHandler(this.numericUpDownThickness_ValueChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1898, 1049);
+            this.Controls.Add(this.numericUpDownThickness);
+            this.Controls.Add(this.btnRehacer);
+            this.Controls.Add(this.btnDeshacer);
             this.Controls.Add(this.picker);
             this.Controls.Add(this.PenColor);
             this.Controls.Add(this.BtnRefresh);
@@ -322,6 +392,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PenColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownThickness)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -349,6 +420,11 @@
         private System.Windows.Forms.Button BtnRefresh;
         private System.Windows.Forms.PictureBox PenColor;
         private System.Windows.Forms.PictureBox picker;
+        private System.Windows.Forms.ToolStripMenuItem nuevoArchivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cargarArchivoToolStripMenuItem;
+        private System.Windows.Forms.Button btnDeshacer;
+        private System.Windows.Forms.Button btnRehacer;
+        private System.Windows.Forms.NumericUpDown numericUpDownThickness;
     }
 }
 

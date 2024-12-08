@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,9 @@ namespace Proyecto
         Pen p = new Pen(Color.Black, 2);
         Pen eraser = new Pen(Color.White, 5);
         int x, y, sX, sY, cX, cY;
+
+        Stack<Bitmap> undoStack = new Stack<Bitmap>();
+        Stack<Bitmap> redoStack = new Stack<Bitmap>();
 
         ColorDialog cd = new ColorDialog();
         Color newColor;
@@ -73,6 +77,10 @@ namespace Proyecto
             g = Graphics.FromImage(bm);
             g.Clear(Color.White);
             pictureBox1.Image = bm;
+            p.Width = (float)numericUpDownThickness.Value;
+
+            numericUpDownThickness.ValueChanged += numericUpDownThickness_ValueChanged;
+        
         }
 
      
@@ -153,6 +161,8 @@ namespace Proyecto
             g.Clear(Color.White);
             pictureBox1.Image = bm;
             index = 0;
+
+            GuardarEstado();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -181,6 +191,8 @@ namespace Proyecto
                 Point point = set_point(pictureBox1, e.Location);
                 Fill(bm, point.X, point.Y, newColor);
                 pictureBox1.Image = bm; // Asegúrate de actualizar la imagen
+
+                GuardarEstado();
             }
         }
 
@@ -189,6 +201,90 @@ namespace Proyecto
             index = 7;
             pictureBox1.Image = bm;
 
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "JPEG Image|*.jpg|Bitmap Image|*.bmp|PNG Image|*.png";
+                saveFileDialog.Title = "Save an Image File";
+                saveFileDialog.FileName = "image";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        ImageFormat format = ImageFormat.Png;
+
+                        // Seleccionar el formato basado en la extensión elegida
+                        switch (saveFileDialog.FilterIndex)
+                        {
+                            case 1:
+                                format = ImageFormat.Jpeg;
+                                break;
+                            case 2:
+                                format = ImageFormat.Bmp;
+                                break;
+                            case 3:
+                                format = ImageFormat.Png;
+                                break;
+                        }
+
+                        // Guardar la imagen del PictureBox en el formato seleccionado
+                        bm.Save(saveFileDialog.FileName, format);
+                        MessageBox.Show("Imagen guardada exitosamente", "Guardar Imagen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al guardar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void nuevoArchivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Limpiar el Bitmap y reiniciar el Graphics
+            bm = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bm);
+            g.Clear(Color.White);
+
+            // Establecer la imagen limpia al PictureBox
+            pictureBox1.Image = bm;
+
+            MessageBox.Show("Nuevo archivo creado.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        
+        }
+
+        private void cargarArchivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+                openFileDialog.Title = "Cargar Archivo de Imagen";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        // Cargar la imagen seleccionada
+                        Image imagenCargada = Image.FromFile(openFileDialog.FileName);
+
+                        // Redimensionar la imagen al tamaño del PictureBox
+                        bm = RedimensionarImagen(imagenCargada, pictureBox1.Width, pictureBox1.Height);
+                        g = Graphics.FromImage(bm);
+                        pictureBox1.Image = bm;
+
+                        MessageBox.Show("Archivo cargado y redimensionado exitosamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al cargar el archivo: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                GuardarEstado();
+            }
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -227,6 +323,54 @@ namespace Proyecto
             sY = e.Y - cY;
         }
 
+        private void btnDeshacer_Click(object sender, EventArgs e)
+        {
+            if (undoStack.Count > 0)
+            {
+                // Guardar el estado actual en la pila de rehacer
+                redoStack.Push(new Bitmap(bm));
+
+                // Recuperar el último estado de la pila de deshacer
+                bm = undoStack.Pop();
+                g = Graphics.FromImage(bm);
+                pictureBox1.Image = bm;
+            }
+            else
+            {
+                MessageBox.Show("No hay cambios para deshacer.", "Deshacer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnRehacer_Click(object sender, EventArgs e)
+        {
+            if (redoStack.Count > 0)
+            {
+                // Guardar el estado actual en la pila de deshacer
+                undoStack.Push(new Bitmap(bm));
+
+                // Recuperar el último estado de la pila de rehacer
+                bm = redoStack.Pop();
+                g = Graphics.FromImage(bm);
+                pictureBox1.Image = bm;
+            }
+            else
+            {
+                MessageBox.Show("No hay cambios para rehacer.", "Rehacer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void numericUpDownThickness_ValueChanged(object sender, EventArgs e)
+        {
+            if (index == 1) // Herramienta de lápiz
+            {
+                p.Width = (float)numericUpDownThickness.Value;
+            }
+            else if (index == 2) // Herramienta de borrador
+            {
+                eraser.Width = (float)numericUpDownThickness.Value;
+            }
+        }
+
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             paint = false;
@@ -248,6 +392,8 @@ namespace Proyecto
             {
                 g.DrawLine(p, cX, cY, x, y);
             }
+
+            GuardarEstado();
         }
 
         private void BtnPencil_Click(object sender, EventArgs e)
@@ -266,5 +412,32 @@ namespace Proyecto
             float pY = 1f * picture.Image.Height / picture.Height;
             return new Point((int)(pt.X * pX),(int)(pt.Y * pY));
         }
+
+        private Bitmap RedimensionarImagen(Image imagenOriginal, int ancho, int alto)
+        {
+            Bitmap imagenRedimensionada = new Bitmap(ancho, alto);
+
+            using (Graphics g = Graphics.FromImage(imagenRedimensionada))
+            {
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.DrawImage(imagenOriginal, 0, 0, ancho, alto);
+                GuardarEstado();
+            }
+
+            return imagenRedimensionada;
+
+
+        }
+
+        private void GuardarEstado()
+        {
+            // Crear una copia del Bitmap actual y almacenarlo en la pila de deshacer
+            Bitmap copia = new Bitmap(bm);
+            undoStack.Push(copia);
+
+            // Limpiar la pila de rehacer porque un nuevo cambio invalida los futuros estados
+            redoStack.Clear();
+        }
+
     }
 }
