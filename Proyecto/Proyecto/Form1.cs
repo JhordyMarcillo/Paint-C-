@@ -89,12 +89,15 @@ namespace Proyecto
         {
             cd.ShowDialog();
             newColor = cd.Color;
-            pictureBox1.BackColor = cd.Color;
+            pic_color.BackColor = cd.Color;
             p.Color = cd.Color;
         }
-
+        
         private void BtnPencilWidth_Click(object sender, EventArgs e)
         {
+            p.Width = 1; 
+            eraser.Width = 1; 
+            MessageBox.Show("Grosor del lápiz ajustado a 1", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void pictureBox7_Click(object sender, EventArgs e)
@@ -153,6 +156,67 @@ namespace Proyecto
                 {
                     g.DrawLine(p, cX, cY, x, y);
                 }
+
+                if(index == 6)
+                {
+                    int sides = 5;
+
+                    float centerX = cX + sX / 2;
+                    float centerY = cY + sY / 2;
+
+                    float radius = Math.Min(Math.Abs(sX), Math.Abs(sY)) / 2;
+
+                    PointF[] pentagonPoints = new PointF[sides];
+
+                    for (int i = 0; i < sides; i++)
+                    {
+                        double angle = i * (2 * Math.PI / sides) - Math.PI / 2;
+                        pentagonPoints[i] = new PointF(
+                            centerX + radius * (float)Math.Cos(angle),
+                            centerY + radius * (float)Math.Sin(angle)
+                        );
+                    }
+
+                    g.DrawPolygon(p, pentagonPoints);
+                }
+
+                if( index == 9)
+                {
+                    PointF[] rightTrianglePoints = new PointF[3];
+
+                    rightTrianglePoints[0] = new PointF(cX, cY);
+
+                    rightTrianglePoints[1] = new PointF(cX + sX, cY);
+
+                    rightTrianglePoints[2] = new PointF(cX, cY + sY);
+
+                    g.DrawPolygon(p, rightTrianglePoints);
+                }
+
+                if(index == 8)
+                {
+                    float centerX = cX + sX / 2;
+                    float centerY = cY + sY / 2;
+
+                    float outerRadius = Math.Min(Math.Abs(sX), Math.Abs(sY)) / 2;
+                    float innerRadius = outerRadius / 2.5f; 
+
+                    PointF[] starPoints = new PointF[10];
+
+                    for (int i = 0; i < 10; i++)
+                    {
+                        float radius = (i % 2 == 0) ? outerRadius : innerRadius;
+
+                        double angle = i * (2 * Math.PI / 10) - Math.PI / 2; // Ajuste para iniciar en la parte superior
+
+                        starPoints[i] = new PointF(
+                            centerX + radius * (float)Math.Cos(angle),
+                            centerY + radius * (float)Math.Sin(angle)
+                        );
+                    }
+
+                    g.DrawPolygon(p, starPoints);
+                }
             }        
         }
 
@@ -178,9 +242,9 @@ namespace Proyecto
         private void picker_MouseClick(object sender, MouseEventArgs e)
         {
             Point point = set_point(picker, e.Location);
-            pictureBox1.BackColor = ((Bitmap)picker.Image).GetPixel(point.X, point.Y);
-            newColor = pictureBox1.BackColor;
-            p.Color = pictureBox1.BackColor;
+            pic_color.BackColor = ((Bitmap)picker.Image).GetPixel(point.X, point.Y);
+            newColor = pic_color.BackColor;
+            p.Color = pic_color.BackColor;
             
         }
 
@@ -203,54 +267,13 @@ namespace Proyecto
 
         }
 
-        private void BtnSave_Click(object sender, EventArgs e)
-        {
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-            {
-                saveFileDialog.Filter = "JPEG Image|*.jpg|Bitmap Image|*.bmp|PNG Image|*.png";
-                saveFileDialog.Title = "Save an Image File";
-                saveFileDialog.FileName = "image";
-
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        ImageFormat format = ImageFormat.Png;
-
-                        // Seleccionar el formato basado en la extensión elegida
-                        switch (saveFileDialog.FilterIndex)
-                        {
-                            case 1:
-                                format = ImageFormat.Jpeg;
-                                break;
-                            case 2:
-                                format = ImageFormat.Bmp;
-                                break;
-                            case 3:
-                                format = ImageFormat.Png;
-                                break;
-                        }
-
-                        // Guardar la imagen del PictureBox en el formato seleccionado
-                        bm.Save(saveFileDialog.FileName, format);
-                        MessageBox.Show("Imagen guardada exitosamente", "Guardar Imagen", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Error al guardar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-        }
 
         private void nuevoArchivoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Limpiar el Bitmap y reiniciar el Graphics
             bm = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             g = Graphics.FromImage(bm);
             g.Clear(Color.White);
 
-            // Establecer la imagen limpia al PictureBox
             pictureBox1.Image = bm;
 
             MessageBox.Show("Nuevo archivo creado.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -327,10 +350,8 @@ namespace Proyecto
         {
             if (undoStack.Count > 0)
             {
-                // Guardar el estado actual en la pila de rehacer
                 redoStack.Push(new Bitmap(bm));
 
-                // Recuperar el último estado de la pila de deshacer
                 bm = undoStack.Pop();
                 g = Graphics.FromImage(bm);
                 pictureBox1.Image = bm;
@@ -345,10 +366,8 @@ namespace Proyecto
         {
             if (redoStack.Count > 0)
             {
-                // Guardar el estado actual en la pila de deshacer
                 undoStack.Push(new Bitmap(bm));
 
-                // Recuperar el último estado de la pila de rehacer
                 bm = redoStack.Pop();
                 g = Graphics.FromImage(bm);
                 pictureBox1.Image = bm;
@@ -361,14 +380,91 @@ namespace Proyecto
 
         private void numericUpDownThickness_ValueChanged(object sender, EventArgs e)
         {
-            if (index == 1) // Herramienta de lápiz
+            if (index == 1) 
             {
                 p.Width = (float)numericUpDownThickness.Value;
             }
-            else if (index == 2) // Herramienta de borrador
+            else if (index == 2) 
             {
                 eraser.Width = (float)numericUpDownThickness.Value;
             }
+        }
+
+        private void guardarArchivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "JPEG Image|*.jpg|Bitmap Image|*.bmp|PNG Image|*.png";
+                saveFileDialog.Title = "Save an Image File";
+                saveFileDialog.FileName = "image";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        ImageFormat format = ImageFormat.Png;
+
+                        switch (saveFileDialog.FilterIndex)
+                        {
+                            case 1:
+                                format = ImageFormat.Jpeg;
+                                break;
+                            case 2:
+                                format = ImageFormat.Bmp;
+                                break;
+                            case 3:
+                                format = ImageFormat.Png;
+                                break;
+                        }
+
+                        bm.Save(saveFileDialog.FileName, format);
+                        MessageBox.Show("Imagen guardada exitosamente", "Guardar Imagen", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error al guardar la imagen: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void picker_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnPentagono_Click(object sender, EventArgs e)
+        {
+            index = 6;
+        }
+
+        private void BtnStair_Click(object sender, EventArgs e)
+        {
+            index = 8;
+        }
+
+        private void BtnParalelogramo_Click(object sender, EventArgs e)
+        {
+            index = 9;
+        }
+
+        private void BtnLineWidth2_Click(object sender, EventArgs e)
+        {
+            p.Width = 5; 
+            eraser.Width = 5; 
+            MessageBox.Show("Grosor del lápiz ajustado a 5", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void BtnLineWidth3_Click(object sender, EventArgs e)
+        {
+            p.Width = 10; 
+            eraser.Width = 10;
+            MessageBox.Show("Grosor del lápiz ajustado a 10", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void pic_color_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
@@ -391,6 +487,68 @@ namespace Proyecto
             if(index == 5)
             {
                 g.DrawLine(p, cX, cY, x, y);
+            }
+
+            if(index == 6)
+            {
+                int sides = 5;
+
+                float centerX = cX + sX / 2;
+                float centerY = cY + sY / 2;
+
+                float radius = Math.Min(Math.Abs(sX), Math.Abs(sY)) / 2;
+
+                PointF[] pentagonPoints = new PointF[sides];
+
+                for (int i = 0; i < sides; i++)
+                {
+                    double angle = i * (2 * Math.PI / sides) - Math.PI / 2;
+                    pentagonPoints[i] = new PointF(
+                        centerX + radius * (float)Math.Cos(angle),
+                        centerY + radius * (float)Math.Sin(angle)
+                    );
+                }
+
+                g.DrawPolygon(p, pentagonPoints);
+            }
+
+            if (index == 9)
+            {
+                PointF[] rightTrianglePoints = new PointF[3];
+
+                rightTrianglePoints[0] = new PointF(cX, cY);
+
+                rightTrianglePoints[1] = new PointF(cX + sX, cY);
+
+                rightTrianglePoints[2] = new PointF(cX, cY + sY);
+
+                g.DrawPolygon(p, rightTrianglePoints);
+            }
+
+            if (index == 8)
+            {
+                float centerX = cX + sX / 2;
+                float centerY = cY + sY / 2;
+
+
+                float outerRadius = Math.Min(Math.Abs(sX), Math.Abs(sY)) / 2;
+                float innerRadius = outerRadius / 2.5f; 
+
+                PointF[] starPoints = new PointF[12];
+
+                for (int i = 0; i < 12; i++)
+                {
+                    float radius = (i % 2 == 0) ? outerRadius : innerRadius;
+
+                    double angle = i * (2 * Math.PI / 10) - Math.PI / 2; 
+
+                    starPoints[i] = new PointF(
+                        centerX + radius * (float)Math.Cos(angle),
+                        centerY + radius * (float)Math.Sin(angle)
+                    );
+                }
+
+                g.DrawPolygon(p, starPoints);
             }
 
             GuardarEstado();
@@ -425,19 +583,14 @@ namespace Proyecto
             }
 
             return imagenRedimensionada;
-
-
         }
 
         private void GuardarEstado()
-        {
-            // Crear una copia del Bitmap actual y almacenarlo en la pila de deshacer
+        { 
             Bitmap copia = new Bitmap(bm);
             undoStack.Push(copia);
 
-            // Limpiar la pila de rehacer porque un nuevo cambio invalida los futuros estados
             redoStack.Clear();
         }
-
     }
 }
