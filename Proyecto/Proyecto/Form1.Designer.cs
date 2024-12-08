@@ -35,8 +35,6 @@
             this.nuevoArchivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cargarArchivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarArchivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.BtnRefresh = new System.Windows.Forms.Button();
-            this.numericUpDownThickness = new System.Windows.Forms.NumericUpDown();
             this.pic_color = new System.Windows.Forms.Button();
             this.BtnLineWidth3 = new System.Windows.Forms.Button();
             this.BtnLineWidth2 = new System.Windows.Forms.Button();
@@ -57,7 +55,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.PinTitle.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownThickness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -85,7 +82,7 @@
             this.archivoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1898, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(1898, 33);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -96,7 +93,7 @@
             this.cargarArchivoToolStripMenuItem,
             this.guardarArchivoToolStripMenuItem});
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(88, 30);
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(88, 29);
             this.archivoToolStripMenuItem.Text = "Archivo";
             this.archivoToolStripMenuItem.Click += new System.EventHandler(this.archivoToolStripMenuItem_Click);
             // 
@@ -121,40 +118,6 @@
             this.guardarArchivoToolStripMenuItem.Text = "Guardar Archivo";
             this.guardarArchivoToolStripMenuItem.Click += new System.EventHandler(this.guardarArchivoToolStripMenuItem_Click);
             // 
-            // BtnRefresh
-            // 
-            this.BtnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnRefresh.Location = new System.Drawing.Point(315, 38);
-            this.BtnRefresh.Name = "BtnRefresh";
-            this.BtnRefresh.Size = new System.Drawing.Size(73, 55);
-            this.BtnRefresh.TabIndex = 33;
-            this.BtnRefresh.Text = "Limpiar";
-            this.BtnRefresh.UseVisualStyleBackColor = true;
-            this.BtnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
-            // 
-            // numericUpDownThickness
-            // 
-            this.numericUpDownThickness.Location = new System.Drawing.Point(1152, 56);
-            this.numericUpDownThickness.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.numericUpDownThickness.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownThickness.Name = "numericUpDownThickness";
-            this.numericUpDownThickness.Size = new System.Drawing.Size(100, 26);
-            this.numericUpDownThickness.TabIndex = 54;
-            this.numericUpDownThickness.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.numericUpDownThickness.ValueChanged += new System.EventHandler(this.numericUpDownThickness_ValueChanged);
-            // 
             // pic_color
             // 
             this.pic_color.BackColor = System.Drawing.Color.Black;
@@ -170,7 +133,7 @@
             this.BtnLineWidth3.BackgroundImage = global::Proyecto.Properties.Resources.Line3;
             this.BtnLineWidth3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnLineWidth3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnLineWidth3.Location = new System.Drawing.Point(1270, 85);
+            this.BtnLineWidth3.Location = new System.Drawing.Point(1194, 91);
             this.BtnLineWidth3.Name = "BtnLineWidth3";
             this.BtnLineWidth3.Size = new System.Drawing.Size(73, 22);
             this.BtnLineWidth3.TabIndex = 56;
@@ -183,7 +146,7 @@
             this.BtnLineWidth2.BackgroundImage = global::Proyecto.Properties.Resources.Line2;
             this.BtnLineWidth2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnLineWidth2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnLineWidth2.Location = new System.Drawing.Point(1270, 57);
+            this.BtnLineWidth2.Location = new System.Drawing.Point(1194, 63);
             this.BtnLineWidth2.Name = "BtnLineWidth2";
             this.BtnLineWidth2.Size = new System.Drawing.Size(73, 22);
             this.BtnLineWidth2.TabIndex = 55;
@@ -194,7 +157,7 @@
             // 
             this.btnRehacer.BackgroundImage = global::Proyecto.Properties.Resources.rehacer;
             this.btnRehacer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnRehacer.Location = new System.Drawing.Point(473, 38);
+            this.btnRehacer.Location = new System.Drawing.Point(434, 38);
             this.btnRehacer.Name = "btnRehacer";
             this.btnRehacer.Size = new System.Drawing.Size(73, 55);
             this.btnRehacer.TabIndex = 53;
@@ -205,7 +168,7 @@
             // 
             this.btnDeshacer.BackgroundImage = global::Proyecto.Properties.Resources.deshacer;
             this.btnDeshacer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnDeshacer.Location = new System.Drawing.Point(394, 38);
+            this.btnDeshacer.Location = new System.Drawing.Point(355, 38);
             this.btnDeshacer.Name = "btnDeshacer";
             this.btnDeshacer.Size = new System.Drawing.Size(73, 55);
             this.btnDeshacer.TabIndex = 52;
@@ -266,7 +229,7 @@
             this.BtnLineWidth1.BackgroundImage = global::Proyecto.Properties.Resources.Line11;
             this.BtnLineWidth1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.BtnLineWidth1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnLineWidth1.Location = new System.Drawing.Point(1270, 30);
+            this.BtnLineWidth1.Location = new System.Drawing.Point(1194, 36);
             this.BtnLineWidth1.Name = "BtnLineWidth1";
             this.BtnLineWidth1.Size = new System.Drawing.Size(73, 22);
             this.BtnLineWidth1.TabIndex = 9;
@@ -379,11 +342,9 @@
             this.Controls.Add(this.BtnLineWidth3);
             this.Controls.Add(this.BtnLineWidth2);
             this.Controls.Add(this.pic_color);
-            this.Controls.Add(this.numericUpDownThickness);
             this.Controls.Add(this.btnRehacer);
             this.Controls.Add(this.btnDeshacer);
             this.Controls.Add(this.picker);
-            this.Controls.Add(this.BtnRefresh);
             this.Controls.Add(this.BtnLine);
             this.Controls.Add(this.BtnSquare);
             this.Controls.Add(this.BtnColorSet);
@@ -405,7 +366,6 @@
             this.PinTitle.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownThickness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picker)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -429,13 +389,11 @@
         private System.Windows.Forms.Button BtnColorSet;
         private System.Windows.Forms.Button BtnSquare;
         private System.Windows.Forms.Button BtnLine;
-        private System.Windows.Forms.Button BtnRefresh;
         private System.Windows.Forms.PictureBox picker;
         private System.Windows.Forms.ToolStripMenuItem nuevoArchivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cargarArchivoToolStripMenuItem;
         private System.Windows.Forms.Button btnDeshacer;
         private System.Windows.Forms.Button btnRehacer;
-        private System.Windows.Forms.NumericUpDown numericUpDownThickness;
         private System.Windows.Forms.ToolStripMenuItem guardarArchivoToolStripMenuItem;
         private System.Windows.Forms.Button pic_color;
         private System.Windows.Forms.Button BtnLineWidth2;

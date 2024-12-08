@@ -77,9 +77,7 @@ namespace Proyecto
             g = Graphics.FromImage(bm);
             g.Clear(Color.White);
             pictureBox1.Image = bm;
-            p.Width = (float)numericUpDownThickness.Value;
 
-            numericUpDownThickness.ValueChanged += numericUpDownThickness_ValueChanged;
         
         }
 
@@ -220,14 +218,6 @@ namespace Proyecto
             }        
         }
 
-        private void BtnRefresh_Click(object sender, EventArgs e)
-        {
-            g.Clear(Color.White);
-            pictureBox1.Image = bm;
-            index = 0;
-
-            GuardarEstado();
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -378,17 +368,6 @@ namespace Proyecto
             }
         }
 
-        private void numericUpDownThickness_ValueChanged(object sender, EventArgs e)
-        {
-            if (index == 1) 
-            {
-                p.Width = (float)numericUpDownThickness.Value;
-            }
-            else if (index == 2) 
-            {
-                eraser.Width = (float)numericUpDownThickness.Value;
-            }
-        }
 
         private void guardarArchivoToolStripMenuItem_Click(object sender, EventArgs e)
         {
