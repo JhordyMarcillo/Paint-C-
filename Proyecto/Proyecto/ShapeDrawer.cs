@@ -11,12 +11,18 @@ namespace Proyecto
     {
         private Graphics graphics;
         private Pen pen;
+        private Brush eraserBrush;
 
+        //Inicializacion de variables
         public ShapeDrawer(Graphics graphics, Pen pen)
         {
             this.graphics = graphics;
             this.pen = pen;
+            this.eraserBrush = new SolidBrush(Color.White);
         }
+
+        //Dibujo de figuras
+
 
         public void DibujarCirculo(int cX, int cY, int sX, int sY)
         {
@@ -41,6 +47,7 @@ namespace Proyecto
             float radius = Math.Min(Math.Abs(sX), Math.Abs(sY)) / 2;
             PointF[] points = new PointF[sides];
 
+            //Va iterando con los puntos correspondientes
             for (int i = 0; i < sides; i++)
             {
                 double angle = i * (2 * Math.PI / sides) - Math.PI / 2;
@@ -50,6 +57,12 @@ namespace Proyecto
                 );
             }
 
+            graphics.DrawPolygon(pen, points);
+        }
+
+        public void DrawTriangle(Point p1, Point p2, Point p3)
+        {
+            PointF[] points = { p1, p2, p3 };
             graphics.DrawPolygon(pen, points);
         }
 
@@ -72,6 +85,12 @@ namespace Proyecto
             }
 
             graphics.DrawPolygon(pen, points);
+        }
+
+        public void Erase(int x, int y, int width, int height)
+        {
+            //Se implementa la funcion de un borrador
+            graphics.FillRectangle(eraserBrush, x, y, width, height);
         }
     }
 

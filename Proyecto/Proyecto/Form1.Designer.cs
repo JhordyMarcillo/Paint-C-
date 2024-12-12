@@ -46,7 +46,7 @@
             this.BtnColorSet = new System.Windows.Forms.Button();
             this.BtnLineWidth1 = new System.Windows.Forms.Button();
             this.BtnPentagono = new System.Windows.Forms.Button();
-            this.BtnParalelogramo = new System.Windows.Forms.Button();
+            this.BtnTriangulo = new System.Windows.Forms.Button();
             this.BtnStair = new System.Windows.Forms.Button();
             this.BtnCircle = new System.Windows.Forms.Button();
             this.rellenar = new System.Windows.Forms.Button();
@@ -248,17 +248,17 @@
             this.BtnPentagono.UseVisualStyleBackColor = true;
             this.BtnPentagono.Click += new System.EventHandler(this.BtnPentagono_Click);
             // 
-            // BtnParalelogramo
+            // BtnTriangulo
             // 
-            this.BtnParalelogramo.BackgroundImage = global::Proyecto.Properties.Resources.triangulo;
-            this.BtnParalelogramo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnParalelogramo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnParalelogramo.Location = new System.Drawing.Point(938, 38);
-            this.BtnParalelogramo.Name = "BtnParalelogramo";
-            this.BtnParalelogramo.Size = new System.Drawing.Size(73, 55);
-            this.BtnParalelogramo.TabIndex = 7;
-            this.BtnParalelogramo.UseVisualStyleBackColor = true;
-            this.BtnParalelogramo.Click += new System.EventHandler(this.BtnParalelogramo_Click);
+            this.BtnTriangulo.BackgroundImage = global::Proyecto.Properties.Resources.triangulo;
+            this.BtnTriangulo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnTriangulo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnTriangulo.Location = new System.Drawing.Point(938, 38);
+            this.BtnTriangulo.Name = "BtnTriangulo";
+            this.BtnTriangulo.Size = new System.Drawing.Size(73, 55);
+            this.BtnTriangulo.TabIndex = 7;
+            this.BtnTriangulo.UseVisualStyleBackColor = true;
+            this.BtnTriangulo.Click += new System.EventHandler(this.BtnTriangulo_Click);
             // 
             // BtnStair
             // 
@@ -350,7 +350,7 @@
             this.Controls.Add(this.BtnColorSet);
             this.Controls.Add(this.BtnLineWidth1);
             this.Controls.Add(this.BtnPentagono);
-            this.Controls.Add(this.BtnParalelogramo);
+            this.Controls.Add(this.BtnTriangulo);
             this.Controls.Add(this.BtnStair);
             this.Controls.Add(this.BtnCircle);
             this.Controls.Add(this.rellenar);
@@ -383,7 +383,7 @@
         private System.Windows.Forms.Button rellenar;
         private System.Windows.Forms.Button BtnCircle;
         private System.Windows.Forms.Button BtnStair;
-        private System.Windows.Forms.Button BtnParalelogramo;
+        private System.Windows.Forms.Button BtnTriangulo;
         private System.Windows.Forms.Button BtnPentagono;
         private System.Windows.Forms.Button BtnLineWidth1;
         private System.Windows.Forms.Button BtnColorSet;

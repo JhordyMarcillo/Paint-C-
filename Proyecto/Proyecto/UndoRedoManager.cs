@@ -13,9 +13,10 @@ namespace Proyecto
         {
             Bitmap copia = new Bitmap(bm);
             undoStack.Push(copia);
-            redoStack.Clear();  // Limpiar la pila de rehacer cuando se realiza una nueva acción
+            redoStack.Clear();  // Limpiar la pila
         }
 
+        //Metodo para deshacer los cambios
         public Bitmap Deshacer(Bitmap bm)
         {
             if (undoStack.Count > 0)
@@ -25,12 +26,14 @@ namespace Proyecto
             }
             else
             {
+                //Manejo de excepciones
                 throw new InvalidOperationException("No hay cambios para deshacer.");
             }
 
             return bm;
         }
 
+        //Metodo para deshacer los cambios
         public Bitmap Rehacer(Bitmap bm)
         {
             if (redoStack.Count > 0)
@@ -40,6 +43,7 @@ namespace Proyecto
             }
             else
             {
+                //Manejo de excepciones
                 throw new InvalidOperationException("No hay cambios para rehacer.");
             }
 
