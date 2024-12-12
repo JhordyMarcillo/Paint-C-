@@ -1,6 +1,4 @@
-# Paint-C-
-
-# Proyecto de Dibujo en C#
+# Proyecto de Dibujo (Paint) en C#
 
 Este es un proyecto de aplicación de dibujo desarrollado en C# que permite a los usuarios crear y editar imágenes utilizando diversas herramientas de dibujo. La aplicación incluye funcionalidades como deshacer/rehacer, seleccionar colores y guardar imágenes en diferentes formatos.
 
@@ -19,8 +17,3 @@ Este es un proyecto de aplicación de dibujo desarrollado en C# que permite a lo
 - **Interfaz Gráfica**: WinForms
 - **Librerías**: System.Drawing
 
-## Instalación
-
-1. Clona el repositorio:
-   ```bash
-   git clone https://github.com/tu_usuario/tu_repositorio.git
