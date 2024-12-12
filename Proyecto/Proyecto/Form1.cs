@@ -40,7 +40,7 @@ namespace Proyecto
         }
 
 
-        public void Fill(Bitmap bm, int x, int y,Color newColor)
+        public void Fill(Bitmap bm, int x, int y, Color newColor)
         {
             Color oldColor = bm.GetPixel(x, y);
 
@@ -53,10 +53,10 @@ namespace Proyecto
             {
                 Point point = pixels.Pop();
 
-                 if (point.X < 0 || point.X >= bm.Width || point.Y < 0 || point.Y >= bm.Height)
+                if (point.X < 0 || point.X >= bm.Width || point.Y < 0 || point.Y >= bm.Height)
                     continue;
 
-               if (bm.GetPixel(point.X, point.Y) != oldColor)
+                if (bm.GetPixel(point.X, point.Y) != oldColor)
                     continue;
 
                 bm.SetPixel(point.X, point.Y, newColor);
@@ -78,10 +78,10 @@ namespace Proyecto
             g.Clear(Color.White);
             pictureBox1.Image = bm;
 
-        
+
         }
 
-     
+
 
         private void BtnColorSet_Click(object sender, EventArgs e)
         {
@@ -90,11 +90,11 @@ namespace Proyecto
             pic_color.BackColor = cd.Color;
             p.Color = cd.Color;
         }
-        
+
         private void BtnPencilWidth_Click(object sender, EventArgs e)
         {
-            p.Width = 1; 
-            eraser.Width = 1; 
+            p.Width = 1;
+            eraser.Width = 1;
             MessageBox.Show("Grosor del lápiz ajustado a 1", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -138,7 +138,8 @@ namespace Proyecto
         {
             Graphics g = e.Graphics;
 
-            if (paint) { 
+            if (paint)
+            {
 
                 if (index == 3)
                 {
@@ -155,7 +156,7 @@ namespace Proyecto
                     g.DrawLine(p, cX, cY, x, y);
                 }
 
-                if(index == 6)
+                if (index == 6)
                 {
                     int sides = 5;
 
@@ -178,7 +179,7 @@ namespace Proyecto
                     g.DrawPolygon(p, pentagonPoints);
                 }
 
-                if( index == 9)
+                if (index == 9)
                 {
                     PointF[] rightTrianglePoints = new PointF[3];
 
@@ -191,13 +192,13 @@ namespace Proyecto
                     g.DrawPolygon(p, rightTrianglePoints);
                 }
 
-                if(index == 8)
+                if (index == 8)
                 {
                     float centerX = cX + sX / 2;
                     float centerY = cY + sY / 2;
 
                     float outerRadius = Math.Min(Math.Abs(sX), Math.Abs(sY)) / 2;
-                    float innerRadius = outerRadius / 2.5f; 
+                    float innerRadius = outerRadius / 2.5f;
 
                     PointF[] starPoints = new PointF[10];
 
@@ -215,7 +216,7 @@ namespace Proyecto
 
                     g.DrawPolygon(p, starPoints);
                 }
-            }        
+            }
         }
 
 
@@ -226,7 +227,7 @@ namespace Proyecto
 
         private void Color_Click(object sender, MouseEventArgs e)
         {
-           
+
         }
 
         private void picker_MouseClick(object sender, MouseEventArgs e)
@@ -235,7 +236,7 @@ namespace Proyecto
             pic_color.BackColor = ((Bitmap)picker.Image).GetPixel(point.X, point.Y);
             newColor = pic_color.BackColor;
             p.Color = pic_color.BackColor;
-            
+
         }
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
@@ -267,7 +268,7 @@ namespace Proyecto
             pictureBox1.Image = bm;
 
             MessageBox.Show("Nuevo archivo creado.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        
+
         }
 
         private void cargarArchivoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -313,7 +314,7 @@ namespace Proyecto
         {
             if (paint)
             {
-                if(index == 1)
+                if (index == 1)
                 {
                     px = e.Location;
                     g.DrawLine(p, px, py);
@@ -429,14 +430,14 @@ namespace Proyecto
 
         private void BtnLineWidth2_Click(object sender, EventArgs e)
         {
-            p.Width = 5; 
-            eraser.Width = 5; 
+            p.Width = 5;
+            eraser.Width = 5;
             MessageBox.Show("Grosor del lápiz ajustado a 5", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void BtnLineWidth3_Click(object sender, EventArgs e)
         {
-            p.Width = 10; 
+            p.Width = 10;
             eraser.Width = 10;
             MessageBox.Show("Grosor del lápiz ajustado a 10", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -453,22 +454,22 @@ namespace Proyecto
             sX = x - cX;
             sY = y - cY;
 
-            if(index == 3)
+            if (index == 3)
             {
                 g.DrawEllipse(p, cX, cY, sX, sY);
             }
 
-            if(index == 4) 
+            if (index == 4)
             {
                 g.DrawRectangle(p, cX, cY, sX, sY);
             }
 
-            if(index == 5)
+            if (index == 5)
             {
                 g.DrawLine(p, cX, cY, x, y);
             }
 
-            if(index == 6)
+            if (index == 6)
             {
                 int sides = 5;
 
@@ -511,7 +512,7 @@ namespace Proyecto
 
 
                 float outerRadius = Math.Min(Math.Abs(sX), Math.Abs(sY)) / 2;
-                float innerRadius = outerRadius / 2.5f; 
+                float innerRadius = outerRadius / 2.5f;
 
                 PointF[] starPoints = new PointF[12];
 
@@ -519,7 +520,7 @@ namespace Proyecto
                 {
                     float radius = (i % 2 == 0) ? outerRadius : innerRadius;
 
-                    double angle = i * (2 * Math.PI / 10) - Math.PI / 2; 
+                    double angle = i * (2 * Math.PI / 10) - Math.PI / 2;
 
                     starPoints[i] = new PointF(
                         centerX + radius * (float)Math.Cos(angle),
@@ -547,7 +548,7 @@ namespace Proyecto
         {
             float pX = 1f * picture.Image.Width / picture.Width;
             float pY = 1f * picture.Image.Height / picture.Height;
-            return new Point((int)(pt.X * pX),(int)(pt.Y * pY));
+            return new Point((int)(pt.X * pX), (int)(pt.Y * pY));
         }
 
         private Bitmap RedimensionarImagen(Image imagenOriginal, int ancho, int alto)
@@ -565,7 +566,7 @@ namespace Proyecto
         }
 
         private void GuardarEstado()
-        { 
+        {
             Bitmap copia = new Bitmap(bm);
             undoStack.Push(copia);
 
