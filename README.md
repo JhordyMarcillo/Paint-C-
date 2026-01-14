@@ -1,6 +1,4 @@
-# Paint-C- (WinForms)
-
-Este es un proyecto de aplicación de escritorio en C# desarrollado con **Windows Forms** que recrea de forma simplificada un programa de dibujo tipo *Paint*. La aplicación permite crear y manipular gráficos básicos, cambiar color y grosor de trazo, y guardar la imagen en formatos comunes.
+# Proyecto de Dibujo (Paint) en C#
 
 Este proyecto fue desarrollado como ejercicio para practicar programación orientada a objetos en C#, manejo de eventos y gráficos en Windows Forms.
 
