@@ -1,26 +1,92 @@
-# Paint-C-
+# Paint-C- (WinForms)
 
-# Proyecto de Dibujo en C#
+Este es un proyecto de aplicación de escritorio en C# desarrollado con **Windows Forms** que recrea de forma simplificada un programa de dibujo tipo *Paint*. La aplicación permite crear y manipular gráficos básicos, cambiar color y grosor de trazo, y guardar la imagen en formatos comunes.
 
-Este es un proyecto de aplicación de dibujo desarrollado en C# que permite a los usuarios crear y editar imágenes utilizando diversas herramientas de dibujo. La aplicación incluye funcionalidades como deshacer/rehacer, seleccionar colores y guardar imágenes en diferentes formatos.
+Este proyecto fue desarrollado como ejercicio para practicar programación orientada a objetos en C#, manejo de eventos y gráficos en Windows Forms.
 
-## Características
+---
 
-- **Dibujo Libre**: Usa un lápiz o un borrador para dibujar libremente en el lienzo.
-- **Herramientas de Forma**: Dibuja formas como círculos, líneas, pentágonos y paralelogramos.
-- **Color Personalizable**: Selecciona colores personalizados para el lápiz y el fondo.
-- **Deshacer/Rehacer**: Mantén un historial de cambios para deshacer o rehacer acciones.
-- **Guardar Imágenes**: Guarda tus creaciones en formatos JPEG, BMP y PNG.
+## 🧾 Descripción
 
-## Tecnologías Utilizadas
+La aplicación incluye funcionalidades como:
 
-- **Lenguaje**: C#
-- **Framework**: .NET Framework
-- **Interfaz Gráfica**: WinForms
-- **Librerías**: System.Drawing
+- Dibujo con mouse en el canvas.
+- Selección de color para lápiz/pincel.
+- Ajuste de grosor de trazo.
+- Limpieza del área de dibujo.
+- Guardar la imagen resultante (por ejemplo en JPG o PNG).
 
-## Instalación
+Este programa no está pensado como un editor profesional, sino como una práctica técnica para demostrar comprensión de C#, eventos de UI y dibujo gráfico en WinForms.
 
-1. Clona el repositorio:
+---
+
+## 🧰 Tecnologías
+
+El proyecto utiliza:
+
+- **C#**
+- **.NET Framework / .NET (según proyecto)**
+- **Windows Forms (WinForms)**
+
+---
+
+## 🚀 Cómo compilar y ejecutar
+
+### 1.  Clonar el repositorio:
+
    ```bash
-   git clone https://github.com/tu_usuario/tu_repositorio.git
+   git clone https://github.com/JhordyMarcillo/Paint-C-.git
+   ```
+
+### 2. Abrir la solución:
+
+
+- Abre el archivo de solución (.sln) en Visual Studio (Community/Professional/Enterprise).
+
+- Restaurar dependencias y compilar:
+
+### 3. Ejecutar:
+
+Presiona F5 o selecciona Debug > Start Debugging.
+
+##  📁 Estructura del proyecto
+```text
+Copiar código
+Proyecto/
+├── Properties/
+├── Resources/
+├── FormMain.cs
+├── FormMain.Designer.cs
+├── Program.cs
+├── ...
+└── PaintApp.sln
+```
+- **FormMain.cs:** lógica principal de la ventana y manejo de eventos.
+- **Program.cs:** punto de entrada de la aplicación.
+- **Resources/:**  iconos o recursos embebidos.
+
+## 📌 Uso de la aplicación
+- Abre la aplicación.
+
+- Usa el mouse para dibujar dentro del área de trabajo.
+
+- Selecciona colores desde la paleta.
+
+- Ajusta el grosor si lo deseas.
+
+- Guarda el resultado con la opción de menú correspondiente.
+
+- Revierte algun cambio si deseas
+
+## 🧩 Limitaciones conocidas
+
+- No optimizado para rendimiento pesado.
+
+- Funcionalidad básica enfocada a práctica técnica.
+
+
+## 📝 Licencia
+Este proyecto está protegido bajo una licencia propietaria.
+No se permite el uso, modificación ni redistribución del código sin consentimiento del autor.
+
+Consulta el archivo LICENSE.txt para más detalles.
